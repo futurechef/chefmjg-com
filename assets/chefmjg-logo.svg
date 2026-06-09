@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none">
+  
+  <g font-family="&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif" font-weight="900" font-size="56" letter-spacing="-2">
+    <text x="100" y="48" text-anchor="middle" fill="currentColor">CHEF</text>
+    <text x="100" y="96" text-anchor="middle" fill="currentColor">MJG</text>
+  </g>
+  <line x1="0" y1="56" x2="200" y2="56" stroke="#c8553d" stroke-width="4"></line>
+</svg>

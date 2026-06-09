@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Michael Gutowski — engineered by a chef</title>
+  <meta name="description" content="Chef-engineer shipping AI tools, training, and consulting for enterprise food service. Decades of hospitality. Built for kitchens that actually run." />
+  <meta property="og:title" content="Michael Gutowski — engineered by a chef" />
+  <meta property="og:description" content="CIA-trained chef. AI early adopter. Operator with a track record." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@300..700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    :root {
+      --serif: 'Newsreader', Georgia, serif;
+      --mono:  'IBM Plex Mono', ui-monospace, Menlo, monospace;
+      --sans:  'Inter', system-ui, sans-serif;
+      --paper:  #f5f1e8;
+      --paper-2:#efe9da;
+      --ink:    #1a1611;
+      --dim:    #7a6e5d;
+      --rule:   #d9d1bf;
+      --accent: #1f3b6e;
+      --accent-soft: rgba(31,59,110,.08);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--paper);
+      background-image:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.10  0 0 0 0 0.08  0 0 0 0 0.06  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.35'/></svg>"),
+        radial-gradient(ellipse 1200px 800px at 12% 0%, rgba(217,193,142,.18), transparent 60%),
+        radial-gradient(ellipse 900px 700px at 95% 30%, rgba(31,59,110,.05), transparent 65%);
+      background-attachment: fixed, fixed, fixed;
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        repeating-linear-gradient(0deg,  rgba(26,22,17,.025) 0 1px, transparent 1px 32px),
+        repeating-linear-gradient(90deg, rgba(26,22,17,.018) 0 1px, transparent 1px 32px);
+      mix-blend-mode: multiply;
+    }
+    body > * { position: relative; z-index: 1; }
+    a { color: inherit; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+    @media (max-width: 720px) { .wrap { padding: 0 22px; } }
+
+    /* NAV */
+    nav.top {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(245,241,232,.85);
+      backdrop-filter: saturate(180%) blur(16px);
+      -webkit-backdrop-filter: saturate(180%) blur(16px);
+      border-bottom: 1px solid var(--rule);
+    }
+    nav.top .row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+    nav.top .brand {
+      font-family: var(--mono); font-size: 12px; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--ink); text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+    nav.top .links { display: flex; gap: 28px; align-items: center; }
+    nav.top .links a {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--dim); text-decoration: none; transition: color .2s;
+    }
+    nav.top .links a:hover { color: var(--ink); }
+    nav.top .cta {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--paper);
+      background: var(--ink); padding: 9px 14px; border-radius: 2px;
+      text-decoration: none; transition: background .2s; white-space: nowrap;
+    }
+    nav.top .cta:hover { background: var(--accent); }
+    @media (max-width: 720px) { nav.top .links { display: none; } }
+
+    /* HERO */
+    section.hero { padding: 96px 0 64px; position: relative; }
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 4px;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 28px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-eyebrow .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid var(--rule); padding: 5px 10px; border-radius: 999px;
+      background: var(--accent-soft); color: var(--accent);
+    }
+    .hero-eyebrow .pill::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+    h1.hero-title {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(46px, 7.4vw, 104px); line-height: 0.96;
+      letter-spacing: -2px; margin: 0 0 32px;
+      max-width: 1100px; text-wrap: balance;
+    }
+    h1.hero-title em { font-style: italic; color: var(--accent); font-weight: 300; }
+    h1.hero-title .scribble { position: relative; white-space: nowrap; display: inline-block; }
+    h1.hero-title .scribble svg {
+      position: absolute; left: -4%; right: -4%; bottom: -0.04em;
+      width: 108%; height: 0.32em; overflow: visible;
+      stroke: var(--accent); stroke-width: 4; fill: none;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    .hero-sub {
+      font-family: var(--serif); font-size: 22px; line-height: 1.5;
+      color: var(--ink); max-width: 720px; margin: 0 0 40px; text-wrap: pretty;
+    }
+    .hero-sub .ink { color: var(--accent); font-style: italic; }
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-bottom: 56px; }
+    .btn-primary {
+      font-family: var(--mono); font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+      background: var(--ink); color: var(--paper); padding: 16px 24px; border-radius: 2px;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 12px;
+      transition: transform .2s, background .2s;
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+    .btn-primary .arrow { transition: transform .2s; }
+    .btn-primary:hover .arrow { transform: translate(2px, -2px); }
+    .btn-ghost {
+      font-family: var(--mono); font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--ink); text-decoration: none;
+      padding: 16px 0; border-bottom: 1px solid var(--ink);
+      transition: color .2s, border-color .2s;
+    }
+    .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* SPEC SHEET */
+    .specs {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .specs .spec { padding: 24px 28px 24px 0; border-right: 1px solid var(--rule); }
+    .specs .spec:last-child { border-right: none; padding-right: 0; }
+    .specs .spec .k { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
+    .specs .spec .v { font-family: var(--serif); font-size: 18px; line-height: 1.3; }
+    .specs .spec .v em { font-style: italic; color: var(--accent); }
+    @media (max-width: 880px) {
+      .specs { grid-template-columns: repeat(2, 1fr); }
+      .specs .spec { border-bottom: 1px solid var(--rule); padding: 22px 18px 22px 0; }
+      .specs .spec:nth-child(2) { border-right: none; padding-right: 0; }
+      .specs .spec:nth-child(3), .specs .spec:nth-child(4) { border-bottom: none; }
+    }
+
+    /* PROOF */
+    section.proof { padding: 56px 0; border-bottom: 1px solid var(--rule); }
+    .proof-label { font-family: var(--mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--dim); margin-bottom: 24px; }
+    .proof-line { display: flex; align-items: baseline; gap: 32px; flex-wrap: wrap; font-family: var(--serif); font-size: 22px; }
+    .proof-line .item { display: inline-flex; align-items: baseline; gap: 8px; }
+    .proof-line .item em { font-style: italic; color: var(--accent); }
+    .proof-line .sep { color: var(--rule); }
+    @media (max-width: 720px) { .proof-line { font-size: 18px; gap: 18px; } .proof-line .sep { display: none; } }
+
+    /* SECTION HEADERS */
+    .section-head { display: grid; grid-template-columns: 200px 1fr; gap: 40px; margin-bottom: 56px; align-items: start; }
+    .section-head .num { font-family: var(--mono); font-size: 11px; letter-spacing: 3px; color: var(--dim); text-transform: uppercase; padding-top: 6px; }
+    .section-head h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(36px, 4.8vw, 60px); line-height: 1.05; letter-spacing: -1px; margin: 0; max-width: 800px; text-wrap: balance; }
+    .section-head h2 em { font-style: italic; color: var(--accent); font-weight: 300; }
+    @media (max-width: 720px) { .section-head { grid-template-columns: 1fr; gap: 14px; margin-bottom: 36px; } }
+
+    /* SERVICES */
+    section.services { padding: 96px 0; border-bottom: 1px solid var(--rule); }
+    .svc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+    @media (max-width: 880px) { .svc-grid { grid-template-columns: 1fr; } }
+    .svc { background: var(--paper); padding: 36px 32px; position: relative; transition: background .2s; }
+    .svc:hover { background: var(--paper-2); }
+    .svc .num { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; color: var(--accent); margin-bottom: 18px; }
+    .svc h3 { font-family: var(--serif); font-weight: 500; font-size: 28px; letter-spacing: -0.5px; margin: 0 0 12px; line-height: 1.15; }
+    .svc h3 em { font-style: italic; color: var(--accent); font-weight: 400; }
+    .svc p { font-family: var(--serif); font-size: 16px; line-height: 1.55; color: var(--ink); margin: 0 0 18px; text-wrap: pretty; }
+    .svc .meta { font-family: var(--mono); font-size: 10.5px; line-height: 1.7; color: var(--dim); border-top: 1px dashed var(--rule); padding-top: 14px; margin-top: 18px; }
+    .svc .meta .row { display: grid; grid-template-columns: 70px 1fr; gap: 10px; }
+    .svc .meta .k { color: var(--dim); }
+    .svc .meta .v { color: var(--ink); }
+    /* recipe-mode label */
+    .svc::before {
+      content: attr(data-recipe); position: absolute; top: 36px; right: 32px;
+      font-family: var(--mono); font-size: 9px; letter-spacing: 2px;
+      color: var(--accent); text-transform: uppercase; opacity: .8;
+    }
+
+    /* VIZ MODE */
+    body.viz-mode .svc { background: var(--ink); color: var(--paper); }
+    body.viz-mode .svc:hover { background: #0c0a08; }
+    body.viz-mode .svc h3 { color: var(--paper); }
+    body.viz-mode .svc h3 em { color: #c4d4f3; }
+    body.viz-mode .svc p { color: rgba(245,241,232,.78); }
+    body.viz-mode .svc .meta { border-top-color: rgba(255,255,255,.12); color: rgba(245,241,232,.55); }
+    body.viz-mode .svc .meta .v { color: var(--paper); }
+    body.viz-mode .svc .num { color: #c4d4f3; }
+    body.viz-mode .svc-grid { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.08); }
+    body.viz-mode .svc::before { content: none; }
+    .svc .viz-view { display: none; }
+    body.viz-mode .svc .recipe-view { display: none; }
+    body.viz-mode .svc .viz-view { display: block; }
+
+    /* viz card internals */
+    .viz-view { font-family: var(--mono); }
+    .viz-view .viz-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; }
+    .viz-view .viz-tag { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #c4d4f3; }
+    .viz-view .viz-id  { font-size: 9px; letter-spacing: 1.5px; color: rgba(245,241,232,.4); }
+    .viz-view h3.viz-title { font-family: var(--mono); font-weight: 500; font-size: 14px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--paper); margin: 0 0 4px; }
+    .viz-view .viz-sub { font-size: 10.5px; color: rgba(245,241,232,.55); letter-spacing: 0.3px; margin-bottom: 22px; }
+    .viz-view .chart { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); padding: 22px 18px 18px; margin-bottom: 18px; position: relative; }
+    .viz-view .chart-label { position: absolute; top: 8px; left: 12px; font-size: 8px; letter-spacing: 2px; color: rgba(245,241,232,.4); text-transform: uppercase; }
+    .viz-view .chart svg { display: block; width: 100%; height: auto; }
+    .viz-view .stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; border-top: 1px dashed rgba(255,255,255,.12); padding-top: 14px; }
+    .viz-view .stat .v { font-family: var(--serif); font-size: 26px; line-height: 1; color: var(--paper); margin-bottom: 4px; letter-spacing: -0.5px; }
+    .viz-view .stat .v em { color: #c4d4f3; font-style: italic; }
+    .viz-view .stat .k { font-size: 8.5px; letter-spacing: 1.5px; color: rgba(245,241,232,.5); text-transform: uppercase; }
+    .viz-blue      { stroke: #c4d4f3; }
+    .viz-blue-fill { fill: #c4d4f3; }
+    .viz-dim       { stroke: rgba(245,241,232,.25); }
+    .viz-grid      { stroke: rgba(245,241,232,.08); stroke-width: 1; }
+
+    /* METHOD */
+    section.method { padding: 96px 0; border-bottom: 1px solid var(--rule); }
+    .method-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+    @media (max-width: 880px) { .method-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 480px) { .method-grid { grid-template-columns: 1fr; } }
+    .step { padding: 28px 0; border-top: 2px solid var(--ink); }
+    .step .step-num { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; color: var(--dim); margin-bottom: 16px; }
+    .step .step-num .accent { color: var(--accent); }
+    .step h4 { font-family: var(--serif); font-weight: 500; font-size: 22px; margin: 0 0 12px; letter-spacing: -0.3px; }
+    .step p  { font-family: var(--serif); font-size: 15px; line-height: 1.55; color: var(--ink); margin: 0; }
+
+    /* ABOUT */
+    section.about { padding: 96px 0; border-bottom: 1px solid var(--rule); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    @media (max-width: 880px) { .about-grid { grid-template-columns: 1fr; gap: 36px; } }
+    .about-grid .lead { font-family: var(--serif); font-size: 28px; line-height: 1.35; letter-spacing: -0.3px; text-wrap: pretty; }
+    .about-grid .lead em { color: var(--accent); font-style: italic; }
+    .about-grid .body p { font-family: var(--serif); font-size: 16px; line-height: 1.6; margin: 0 0 14px; text-wrap: pretty; }
+
+    /* NEWSLETTER */
+    section.newsletter { padding: 80px 0; background: var(--ink); color: var(--paper); }
+    .nl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; }
+    @media (max-width: 880px) { .nl-grid { grid-template-columns: 1fr; gap: 32px; align-items: start; } }
+    .nl-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 3px; color: rgba(245,241,232,.5); text-transform: uppercase; margin-bottom: 18px; }
+    .nl-title { font-family: var(--serif); font-weight: 400; font-size: 44px; letter-spacing: -0.8px; line-height: 1.05; margin: 0; text-wrap: balance; }
+    .nl-title em { color: #c4d4f3; font-style: italic; }
+    .nl-form { display: flex; max-width: 460px; border-bottom: 1px solid rgba(245,241,232,.4); transition: border-color .2s; }
+    .nl-form:focus-within { border-bottom-color: var(--paper); }
+    .nl-form input { flex: 1; background: transparent; border: 0; font-family: var(--serif); font-size: 18px; color: var(--paper); padding: 14px 0; outline: none; }
+    .nl-form input::placeholder { color: rgba(245,241,232,.45); }
+    .nl-form button { background: transparent; border: 0; color: var(--paper); font-family: var(--mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; padding: 14px 0 14px 16px; cursor: pointer; transition: color .2s; }
+    .nl-form button:hover { color: #c4d4f3; }
+    .nl-note { font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px; color: rgba(245,241,232,.4); margin-top: 14px; text-transform: uppercase; }
+
+    /* CONTACT */
+    section.contact { padding: 120px 0 80px; }
+    .contact-title { font-family: var(--serif); font-weight: 400; font-size: clamp(56px, 9vw, 140px); line-height: 0.92; letter-spacing: -3px; margin: 0 0 40px; text-wrap: balance; }
+    .contact-title em { font-style: italic; color: var(--accent); font-weight: 300; }
+    .contact-mail { font-family: var(--serif); font-size: clamp(32px, 4.4vw, 52px); color: var(--ink); text-decoration: none; letter-spacing: -0.5px; border-bottom: 2px solid var(--accent); transition: color .2s; }
+    .contact-mail:hover { color: var(--accent); }
+    .contact-meta { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; font-family: var(--mono); font-size: 11px; letter-spacing: 1.5px; color: var(--dim); text-transform: uppercase; }
+    .contact-meta a { color: var(--ink); text-decoration: none; border-bottom: 1px dotted var(--dim); }
+
+    /* MODE TOGGLE */
+    .mode-toggle {
+      position: fixed; bottom: 24px; right: 24px; z-index: 60;
+      display: inline-flex; background: var(--ink); color: var(--paper);
+      border-radius: 999px; padding: 4px;
+      font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+      box-shadow: 0 8px 24px rgba(0,0,0,.18);
+    }
+    .mode-toggle button { background: transparent; border: 0; color: rgba(245,241,232,.55); padding: 8px 14px; cursor: pointer; border-radius: 999px; font-family: inherit; font-size: inherit; letter-spacing: inherit; text-transform: inherit; transition: all .2s; }
+    .mode-toggle button.active { background: var(--paper); color: var(--ink); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s, transform .7s; }
+    .reveal.shown { opacity: 1; transform: none; }
+
+    @media print { .mode-toggle { display: none; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="top">
+    <div class="wrap row">
+      <a class="brand" href="#top" aria-label="chefmjg.com home">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none" style="height:34px;width:auto;color:var(--ink)">
+          <g font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="900" font-size="56" letter-spacing="-2">
+            <text x="100" y="48" text-anchor="middle" fill="currentColor">CHEF</text>
+            <text x="100" y="96" text-anchor="middle" fill="currentColor">MJG</text>
+          </g>
+          <line x1="0" y1="56" x2="200" y2="56" stroke="#c8553d" stroke-width="4"/>
+        </svg>
+        <span style="color:var(--dim);letter-spacing:1.5px;font-size:11px">.com</span>
+      </a>
+      <div class="links">
+        <a href="#services">services</a>
+        <a href="#method">method</a>
+        <a href="#about">about</a>
+        <a href="#newsletter">newsletter</a>
+      </div>
+      <a class="cta" href="mailto:chef@foodml.xyz?subject=Working%20together">Email me ↗</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div class="hero-eyebrow">
+        <span class="pill">available · Q3 2026</span>
+        <span style="color:var(--dim)">consulting · workshops · advisory</span>
+      </div>
+
+      <h1 class="hero-title">
+        Software <em>engineered</em><br>
+        by a <span class="scribble">chef<svg viewBox="0 0 220 30" preserveAspectRatio="none" aria-hidden="true"><path d="M2,18 C 18,4 38,28 60,16 C 82,6 100,24 124,14 C 148,6 168,22 192,12 C 204,8 214,14 218,18" /></svg></span>.
+      </h1>
+
+      <p class="hero-sub">
+        I ship AI tools, training, and operating systems for the kitchens that feed
+        the rest of the building. <span class="ink">Decades in hospitality.</span>
+        Years shipping software. One person who understands both sides of the pass.
+      </p>
+
+      <div class="hero-cta">
+        <a class="btn-primary" href="mailto:chef@foodml.xyz?subject=Working%20together">
+          Email me <span class="arrow">↗</span>
+        </a>
+        <a class="btn-ghost" href="#services">See what I do →</a>
+      </div>
+
+      <div class="specs">
+        <div class="spec">
+          <div class="k">Currently</div>
+          <div class="v">Executive Chef <em>@ Shopify NYC</em></div>
+        </div>
+        <div class="spec">
+          <div class="k">Trained</div>
+          <div class="v">CIA · Michelin kitchens</div>
+        </div>
+        <div class="spec">
+          <div class="k">Building</div>
+          <div class="v">FoodML, Aila, Beetoven, Emojirecipe</div>
+        </div>
+        <div class="spec">
+          <div class="k">Based</div>
+          <div class="v">Brooklyn, NY · works remote</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF STRIP -->
+  <section class="proof reveal">
+    <div class="wrap">
+      <div class="proof-label">// kitchens &amp; companies</div>
+      <div class="proof-line">
+        <span class="item"><em>Shopify</em></span>
+        <span class="sep">⸻</span>
+        <span class="item"><em>Google</em> NYC</span>
+        <span class="sep">⸻</span>
+        <span class="item">Gordon Ramsay <em>at The London</em></span>
+        <span class="sep">⸻</span>
+        <span class="item"><em>The Modern</em> · MoMA</span>
+        <span class="sep">⸻</span>
+        <span class="item">The Knickerbocker</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services reveal" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="num">01 / Services</div>
+        <h2>I'll help you build the <em>custom tools</em> that make the biggest dent in your food operation.</h2>
+      </div>
+
+      <div class="svc-grid">
+
+        <article class="svc" data-recipe="serves 1 enterprise">
+          <div class="recipe-view">
+            <div class="num">// engagement.01</div>
+            <h3>AI Enablement <em>that sticks</em></h3>
+            <p>Workforce-wide rollout for AI tools — designed for non-technical teams in high-volume environments. Job aids, live training, ongoing reinforcement. The kind of program that survives the lunch rush.</p>
+            <div class="meta">
+              <div class="row"><span class="k">format</span><span class="v">10–14 weeks · embedded</span></div>
+              <div class="row"><span class="k">good for</span><span class="v">Compass, Aramark, RA-scale ops</span></div>
+              <div class="row"><span class="k">outcome</span><span class="v">Adoption that compounds</span></div>
+            </div>
+          </div>
+          <div class="viz-view">
+            <div class="viz-head"><span class="viz-tag">// engagement.01</span><span class="viz-id">SVC-AIE</span></div>
+            <h3 class="viz-title">AI ENABLEMENT</h3>
+            <div class="viz-sub">workforce_rollout · n=1 enterprise</div>
+            <div class="chart">
+              <div class="chart-label">adoption curve · 14 weeks</div>
+              <svg viewBox="0 0 280 130" preserveAspectRatio="none">
+                <line class="viz-grid" x1="0" y1="30" x2="280" y2="30"/><line class="viz-grid" x1="0" y1="60" x2="280" y2="60"/><line class="viz-grid" x1="0" y1="90" x2="280" y2="90"/>
+                <rect class="viz-blue-fill" x="6"   y="108" width="14" height="12" opacity=".35"/>
+                <rect class="viz-blue-fill" x="26"  y="100" width="14" height="20" opacity=".4"/>
+                <rect class="viz-blue-fill" x="46"  y="92"  width="14" height="28" opacity=".5"/>
+                <rect class="viz-blue-fill" x="66"  y="78"  width="14" height="42" opacity=".55"/>
+                <rect class="viz-blue-fill" x="86"  y="68"  width="14" height="52" opacity=".65"/>
+                <rect class="viz-blue-fill" x="106" y="58"  width="14" height="62" opacity=".7"/>
+                <rect class="viz-blue-fill" x="126" y="50"  width="14" height="70" opacity=".78"/>
+                <rect class="viz-blue-fill" x="146" y="42"  width="14" height="78" opacity=".82"/>
+                <rect class="viz-blue-fill" x="166" y="36"  width="14" height="84" opacity=".88"/>
+                <rect class="viz-blue-fill" x="186" y="30"  width="14" height="90" opacity=".92"/>
+                <rect class="viz-blue-fill" x="206" y="24"  width="14" height="96" opacity=".96"/>
+                <rect class="viz-blue-fill" x="226" y="20"  width="14" height="100"/>
+                <rect class="viz-blue-fill" x="246" y="16"  width="14" height="104"/>
+                <rect class="viz-blue-fill" x="266" y="14"  width="10" height="106"/>
+              </svg>
+            </div>
+            <div class="stat-row">
+              <div class="stat"><div class="v">14<em>w</em></div><div class="k">embedded</div></div>
+              <div class="stat"><div class="v">8×</div><div class="k">retention</div></div>
+              <div class="stat"><div class="v">RA</div><div class="k">scale</div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="svc" data-recipe="serves your team">
+          <div class="recipe-view">
+            <div class="num">// engagement.02</div>
+            <h3>Custom Tools, <em>built to ship</em></h3>
+            <p>Recipe systems, allergen logic, prep-math copilots, kitchen signage automation — tools that look like they were made for the kitchen because they were. Discovery, design, and delivery, not a slide deck.</p>
+            <div class="meta">
+              <div class="row"><span class="k">format</span><span class="v">Project-based · fixed scope</span></div>
+              <div class="row"><span class="k">stack</span><span class="v">LLMs, Webtrition, custom UI</span></div>
+              <div class="row"><span class="k">outcome</span><span class="v">A tool your team uses daily</span></div>
+            </div>
+          </div>
+          <div class="viz-view">
+            <div class="viz-head"><span class="viz-tag">// engagement.02</span><span class="viz-id">SVC-TOOL</span></div>
+            <h3 class="viz-title">CUSTOM TOOLS</h3>
+            <div class="viz-sub">project_scope · fixed_delivery</div>
+            <div class="chart">
+              <div class="chart-label">deploys · last 12 months</div>
+              <svg viewBox="0 0 280 130" preserveAspectRatio="none">
+                <line class="viz-grid" x1="0" y1="30" x2="280" y2="30"/><line class="viz-grid" x1="0" y1="60" x2="280" y2="60"/><line class="viz-grid" x1="0" y1="90" x2="280" y2="90"/>
+                <path class="viz-blue" stroke-width="2" d="M4,98 L28,86 L52,92 L76,72 L100,80 L124,54 L148,62 L172,40 L196,48 L220,28 L244,34 L268,18"/>
+                <g class="viz-blue-fill">
+                  <circle cx="4"   cy="98" r="3"/><circle cx="28"  cy="86" r="3"/><circle cx="52"  cy="92" r="3"/>
+                  <circle cx="76"  cy="72" r="3"/><circle cx="100" cy="80" r="3"/><circle cx="124" cy="54" r="3"/>
+                  <circle cx="148" cy="62" r="3"/><circle cx="172" cy="40" r="3"/><circle cx="196" cy="48" r="3"/>
+                  <circle cx="220" cy="28" r="3"/><circle cx="244" cy="34" r="3"/><circle cx="268" cy="18" r="4"/>
+                </g>
+              </svg>
+            </div>
+            <div class="stat-row">
+              <div class="stat"><div class="v">12+</div><div class="k">deploys</div></div>
+              <div class="stat"><div class="v">0</div><div class="k">rewrites</div></div>
+              <div class="stat"><div class="v">3<em>mo</em></div><div class="k">avg ship</div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="svc" data-recipe="serves 12–60 chefs">
+          <div class="recipe-view">
+            <div class="num">// engagement.03</div>
+            <h3>Workshops &amp; <em>training</em></h3>
+            <p>Half-day to multi-day intensives for culinary, ops, and leadership teams. Hands-on. Practical. No "AI strategy" theater — your chefs leave with workflows they'll run on Monday.</p>
+            <div class="meta">
+              <div class="row"><span class="k">format</span><span class="v">On-site or remote · cohort</span></div>
+              <div class="row"><span class="k">audience</span><span class="v">Chefs, FOH/BOH, ops mgmt</span></div>
+              <div class="row"><span class="k">outcome</span><span class="v">A team that ships AI</span></div>
+            </div>
+          </div>
+          <div class="viz-view">
+            <div class="viz-head"><span class="viz-tag">// engagement.03</span><span class="viz-id">SVC-WS</span></div>
+            <h3 class="viz-title">WORKSHOPS</h3>
+            <div class="viz-sub">cohort_training · 12–60 chefs</div>
+            <div class="chart">
+              <div class="chart-label">cohort composition · % share</div>
+              <svg viewBox="0 0 280 130" preserveAspectRatio="xMidYMid meet">
+                <g transform="translate(70 65)">
+                  <circle r="48" fill="none" stroke="rgba(245,241,232,.08)" stroke-width="14"/>
+                  <circle r="48" fill="none" stroke="#c4d4f3" stroke-width="14" stroke-dasharray="135 301" stroke-dashoffset="0" transform="rotate(-90)"/>
+                  <circle r="48" fill="none" stroke="#c4d4f3" stroke-width="14" opacity=".55" stroke-dasharray="90 301" stroke-dashoffset="-135" transform="rotate(-90)"/>
+                  <circle r="48" fill="none" stroke="#c4d4f3" stroke-width="14" opacity=".25" stroke-dasharray="76 301" stroke-dashoffset="-225" transform="rotate(-90)"/>
+                </g>
+                <g font-family="IBM Plex Mono,monospace" font-size="9" fill="rgba(245,241,232,.7)" letter-spacing="1">
+                  <g transform="translate(150 30)"><rect width="8" height="8" fill="#c4d4f3"/><text x="14" y="7">CULINARY · 45%</text></g>
+                  <g transform="translate(150 56)"><rect width="8" height="8" fill="#c4d4f3" opacity=".55"/><text x="14" y="7">FOH/BOH · 30%</text></g>
+                  <g transform="translate(150 82)"><rect width="8" height="8" fill="#c4d4f3" opacity=".25"/><text x="14" y="7">OPS MGMT · 25%</text></g>
+                </g>
+              </svg>
+            </div>
+            <div class="stat-row">
+              <div class="stat"><div class="v">½–3<em>d</em></div><div class="k">format</div></div>
+              <div class="stat"><div class="v">60</div><div class="k">max cohort</div></div>
+              <div class="stat"><div class="v">100<em>%</em></div><div class="k">hands-on</div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="svc" data-recipe="serves boards &amp; founders">
+          <div class="recipe-view">
+            <div class="num">// engagement.04</div>
+            <h3>Advisory <em>&amp; fractional</em></h3>
+            <p>On-call advisor for food-tech founders, hospitality groups, and platforms building for the kitchen. Bring the chef into the room before you ship the wrong thing.</p>
+            <div class="meta">
+              <div class="row"><span class="k">format</span><span class="v">Monthly retainer · fractional CTO</span></div>
+              <div class="row"><span class="k">good for</span><span class="v">Seed–Series B food tech</span></div>
+              <div class="row"><span class="k">outcome</span><span class="v">Product that actually works</span></div>
+            </div>
+          </div>
+          <div class="viz-view">
+            <div class="viz-head"><span class="viz-tag">// engagement.04</span><span class="viz-id">SVC-ADV</span></div>
+            <h3 class="viz-title">ADVISORY</h3>
+            <div class="viz-sub">retainer · seed→series_b</div>
+            <div class="chart">
+              <div class="chart-label">where I plug in · stage map</div>
+              <svg viewBox="0 0 280 130" preserveAspectRatio="none">
+                <line class="viz-dim" x1="20" y1="100" x2="260" y2="100" stroke-width="1.5"/>
+                <g font-family="IBM Plex Mono,monospace" font-size="8.5" fill="rgba(245,241,232,.55)" letter-spacing="1" text-anchor="middle">
+                  <text x="40"  y="118">PRESEED</text><text x="100" y="118">SEED</text>
+                  <text x="160" y="118">A</text><text x="220" y="118">B</text>
+                </g>
+                <g>
+                  <line class="viz-dim" x1="40"  y1="100" x2="40"  y2="96" stroke-width="1.5"/>
+                  <line class="viz-dim" x1="100" y1="100" x2="100" y2="96" stroke-width="1.5"/>
+                  <line class="viz-dim" x1="160" y1="100" x2="160" y2="96" stroke-width="1.5"/>
+                  <line class="viz-dim" x1="220" y1="100" x2="220" y2="96" stroke-width="1.5"/>
+                </g>
+                <rect x="80" y="62" width="160" height="22" fill="#c4d4f3" opacity=".18"/>
+                <rect x="80" y="62" width="160" height="22" fill="none" stroke="#c4d4f3" stroke-width="1.5"/>
+                <text x="160" y="77" font-family="IBM Plex Mono,monospace" font-size="10" fill="#c4d4f3" letter-spacing="1.5" text-anchor="middle">SWEET SPOT</text>
+                <g class="viz-blue-fill">
+                  <circle cx="100" cy="73" r="3" opacity=".5"/>
+                  <circle cx="160" cy="73" r="4"/>
+                  <circle cx="220" cy="73" r="3" opacity=".7"/>
+                </g>
+                <g font-family="IBM Plex Mono,monospace" font-size="8" fill="rgba(245,241,232,.45)" letter-spacing="1" text-anchor="middle">
+                  <text x="40"  y="48">advice</text>
+                  <text x="160" y="48">↓ embedded ↓</text>
+                </g>
+              </svg>
+            </div>
+            <div class="stat-row">
+              <div class="stat"><div class="v">2–4<em>h</em></div><div class="k">per week</div></div>
+              <div class="stat"><div class="v">3</div><div class="k">slots open</div></div>
+              <div class="stat"><div class="v">m/m</div><div class="k">retainer</div></div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- METHOD -->
+  <section class="method reveal" id="method">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="num">02 / Method</div>
+        <h2>How a chef-engineer <em>actually</em> works.</h2>
+      </div>
+      <div class="method-grid">
+        <div class="step">
+          <div class="step-num"><span class="accent">01</span> · Mise en place</div>
+          <h4>Get in the kitchen</h4>
+          <p>I show up. Walk the line. Understand the actual workflow, not the org chart. Find the friction.</p>
+        </div>
+        <div class="step">
+          <div class="step-num"><span class="accent">02</span> · Recipe</div>
+          <h4>Design the tool</h4>
+          <p>Sketch the smallest possible thing that removes the most pain. Test it on real prep, not slides.</p>
+        </div>
+        <div class="step">
+          <div class="step-num"><span class="accent">03</span> · Service</div>
+          <h4>Ship &amp; train</h4>
+          <p>Deploy with the team using it. Train in their language. Adjust on the fly during real service.</p>
+        </div>
+        <div class="step">
+          <div class="step-num"><span class="accent">04</span> · Plate-up</div>
+          <h4>Hand off &amp; scale</h4>
+          <p>Document so it survives without me. Ship to the next outlet. Repeat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about reveal" id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="num">03 / About</div>
+        <h2>Twenty years <em>at the pass</em>. Now shipping software for the people still working it.</h2>
+      </div>
+      <div class="about-grid">
+        <div class="lead">
+          I've cooked at Michelin tables, opened restaurants, and run kitchens in
+          hotels, campuses, and high-volume cafés.
+          <em>The tools the industry builds for chefs were not built by chefs.</em>
+          So I started building them.
+        </div>
+        <div class="body">
+          <p>CIA-trained. Cooked at <strong>Gordon Ramsay at The London</strong> (2&thinsp;★) and <strong>The Modern</strong> at MoMA (1&thinsp;★). Ran the kitchen at the Knickerbocker Hotel in Times Square. Opened Wallflower (NYT review · Hungry City).</p>
+          <p>For the last few years I've been one of the first chefs inside Restaurant Associates to operationalize ChatGPT, Claude, and Gemini — building job aids, allergen logic, prep math, and signage automation in production kitchens.</p>
+          <p>Today I build at <strong>Shopify NYC</strong> by day and ship culinary tools — Aila, Beetoven, Emojirecipe, FoodML — in the evenings. Looking for the right team to do this at scale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter reveal" id="newsletter">
+    <div class="wrap">
+      <div class="nl-grid">
+        <div>
+          <div class="nl-eyebrow">// coding cuisine · on substack</div>
+          <h2 class="nl-title">Field notes from a <em>chef shipping AI</em>. One short letter, every other Sunday.</h2>
+        </div>
+        <div>
+          <form class="nl-form" onsubmit="handleNewsletter(event)">
+            <input type="email" required placeholder="you@kitchen.com" aria-label="Email address" />
+            <button type="submit">Subscribe ↗</button>
+          </form>
+          <div class="nl-note">// on substack · no spam · unsubscribe anytime</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact reveal" id="contact">
+    <div class="wrap">
+      <h2 class="contact-title">Let's <em>build</em><br>something good.</h2>
+      <a class="contact-mail" href="mailto:chef@foodml.xyz?subject=Working%20together">chef@foodml.xyz</a>
+      <div class="contact-meta">
+        <div>© 2026 Michael Gutowski · Brooklyn, NY</div>
+        <div>
+          <a href="https://ailacuisine.com">ailacuisine.com</a> ·
+          <a href="https://emojirecipe.com">emojirecipe.com</a> ·
+          <a href="https://www.codingcuisine.dev">codingcuisine.dev</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODE TOGGLE -->
+  <div class="mode-toggle" role="tablist" aria-label="Display mode">
+    <button id="btn-recipe" class="active" type="button">Recipe</button>
+    <button id="btn-viz" type="button">Viz</button>
+  </div>
+
+  <script>
+    // Reveal on scroll
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('shown'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+
+    // Mode toggle
+    function setMode(mode) {
+      document.body.classList.toggle('viz-mode', mode === 'viz');
+      document.getElementById('btn-recipe').classList.toggle('active', mode === 'recipe');
+      document.getElementById('btn-viz').classList.toggle('active', mode === 'viz');
+      try { localStorage.setItem('chefmjg-mode', mode); } catch(e) {}
+    }
+    document.getElementById('btn-recipe').addEventListener('click', function() { setMode('recipe'); });
+    document.getElementById('btn-viz').addEventListener('click',    function() { setMode('viz'); });
+    try { var saved = localStorage.getItem('chefmjg-mode'); if (saved === 'viz') setMode('viz'); } catch(e) {}
+
+    // Newsletter — redirect to Substack with email pre-filled
+    function handleNewsletter(e) {
+      e.preventDefault();
+      var email = encodeURIComponent(e.target.querySelector('input').value);
+      window.open('https://codingcuisine.substack.com/subscribe?email=' + email, '_blank');
+    }
+  </script>
+</body>
+</html>
